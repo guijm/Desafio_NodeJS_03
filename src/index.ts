@@ -6,6 +6,12 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import { Console, log } from "console";
+import { getEnvironmentData } from "worker_threads";
+import { futimesSync } from "fs";
+import { isAnyArrayBuffer } from "util/types";
+import { create } from "domain";
+import { stringify } from "querystring";
 
 dotenv.config();
 
@@ -38,6 +44,48 @@ app.listen(PORT, () => {
 
 
 	// CÓDIGO PARA ATENDER OS REQUERIMENTOS
-	// R01, R02, R03, R04, R05
+
+	var prompt = require('prompt-sync');
+	var prompt = prompt();
+	
+	var qtdeAlunos = prompt("Digite a quantidade de alunos: ");
+	class Alunos {
+		nome:string;
+		nota:number;
+		constructor (nome:string, nota:number){
+			this.nome = nome;
+			this.nota = nota;
+		}
+		getNome(): string{
+			return this.nome;
+		}
+		getNota(): number{
+			return this.nota;
+		}
+	}
+	
+	var listaAlunos:{alunos: Alunos}[] = [
+		{"alunos": new Alunos(prompt("Digite o nome do Aluno: "),prompt("Digite a nota do aluno: "))} 
+	]
+	console.log(listaAlunos);
 	
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
