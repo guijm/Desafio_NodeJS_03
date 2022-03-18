@@ -48,7 +48,7 @@ app.listen(PORT, () => {
 	var prompt = require('prompt-sync');
 	var prompt = prompt();
 	
-	var qtdeAlunos = prompt("Digite a quantidade de alunos: ");
+	var qtdeAlunos = parseInt(prompt("Digite a quantidade de alunos: "));
 	class Alunos {
 		nome:string;
 		nota:number;
@@ -56,18 +56,20 @@ app.listen(PORT, () => {
 			this.nome = nome;
 			this.nota = nota;
 		}
-		getNome(): string{
-			return this.nome;
-		}
-		getNota(): number{
-			return this.nota;
-		}
+			getNome(): string{
+				return this.nome;
+			}
+			getNota(): number{
+				return this.nota;
+			}
+			
 	}
-	
-	var listaAlunos:{alunos: Alunos}[] = [
-		{"alunos": new Alunos(prompt("Digite o nome do Aluno: "),prompt("Digite a nota do aluno: "))} 
-	]
-	console.log(listaAlunos);
+	for(var i = 1; i <= qtdeAlunos; i++){
+		var listaAlunos:{alunos: Alunos} [] = [
+			{"alunos": new Alunos(prompt("Digite o nome do Aluno: "),prompt("Digite a nota do aluno: "))},  
+		]	 
+	}
+    
 	
 });
 
