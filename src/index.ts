@@ -6,12 +6,15 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { Console, log } from "console";
-import { getEnvironmentData } from "worker_threads";
+import { getEnvironmentData, setEnvironmentData } from "worker_threads";
 import { futimesSync } from "fs";
 import { isAnyArrayBuffer } from "util/types";
 import { create } from "domain";
 import { stringify } from "querystring";
+import { notDeepEqual } from "assert";
+import { normalize } from "path";
+import { Console } from "inspector";
+import { NOMEM } from "dns";
 
 dotenv.config();
 
@@ -49,45 +52,15 @@ app.listen(PORT, () => {
 	var prompt = prompt();
 	
 	var qtdeAlunos = parseInt(prompt("Digite a quantidade de alunos: "));
-	class Alunos {
-		nome:string;
-		nota:number;
-		constructor (nome:string, nota:number){
-			this.nome = nome;
-			this.nota = nota;
-		}
-			getNome(): string{
-				return this.nome;
-			}
-			getNota(): number{
-				return this.nota;
-			}
-			
-	}
-	for(var i = 1; i <= qtdeAlunos; i++){
-		var listaAlunos:{alunos: Alunos} [] = [
-			{"alunos": new Alunos(prompt("Digite o nome do Aluno: "),prompt("Digite a nota do aluno: "))},  
-		]	 
-	}
-    
+
+	var listaAlunos = [{
+		nome :String,
+		nota :Number
+	}]
 	
-});
+	for(var i = 1; i <= qtdeAlunos; i++){
+		listaAlunos.push(prompt("Digite o nome do aluno: "),prompt("Digite a nota do aluno: "))
+	}
+	console.log(Math.max.apply(null,listaAlunos.nota));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})
