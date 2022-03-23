@@ -11,7 +11,7 @@ import { futimesSync } from "fs";
 import { isAnyArrayBuffer } from "util/types";
 import { create } from "domain";
 import { stringify } from "querystring";
-import { notDeepEqual } from "assert";
+import { notDeepEqual, notEqual } from "assert";
 import { normalize } from "path";
 import { Console } from "inspector";
 import { NOMEM } from "dns";
@@ -51,16 +51,20 @@ app.listen(PORT, () => {
 	var prompt = require('prompt-sync');
 	var prompt = prompt();
 	
-	var qtdeAlunos = parseInt(prompt("Digite a quantidade de alunos: "));
+	let qtdeAlunos = parseInt(prompt("Digite a quantidade de alunos: "));
 
-	var listaAlunos = [{
-		nome :String,
-		nota :Number
-	}]
+	let listaAlunos = [];
 	
 	for(var i = 1; i <= qtdeAlunos; i++){
-		listaAlunos.push(prompt("Digite o nome do aluno: "),prompt("Digite a nota do aluno: "))
-	}
-	console.log(Math.max.apply(null,listaAlunos.nota));
+		let nome = prompt("Digite o nome do aluno: ");
+		let nota = (parseInt(prompt("Digite a nota do aluno: ")));
+		let aluno = {nome,nota};
+		listaAlunos.push(aluno);
+	}		
+	let maiorNota = listaAlunos.sort((a1,a2) =>(a1.nota < a2.nota) ? 1 : (a1.nota > a2.nota) ? -1 : 0);
 
+	 console.log('Aluno com maior nota é: ');
+	 console.log(maiorNota[0]);
+	
+	
 })
